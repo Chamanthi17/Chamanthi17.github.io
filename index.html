@@ -1,479 +1,288 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Chamanthi Pyneni | Developer Portfolio</title>
-
-<!-- Google Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto&display=swap" rel="stylesheet" />
-
-<style>
-  /* Reset */
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-  }
-
-  body {
-    font-family: 'Roboto', sans-serif;
-    background: #0f111a;
-    color: #cfd8dc;
-    display: flex;
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* Sidebar */
-  nav {
-    position: fixed;
-    left: 0; top: 0; bottom: 0;
-    width: 250px;
-    background: #121622;
-    border-right: 2px solid #0a66c2;
-    display: flex;
-    flex-direction: column;
-    padding: 2rem 1rem;
-  }
-
-  nav h1 {
-    font-family: 'Poppins', sans-serif;
-    color: #0a66c2;
-    font-size: 2.2rem;
-    letter-spacing: 3px;
-    margin-bottom: 2rem;
-    user-select: none;
-  }
-
-  nav ul {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1.8rem;
-  }
-
-  nav ul li a {
-    color: #cfd8dc;
-    text-decoration: none;
-    font-size: 1.1rem;
-    font-weight: 600;
-    padding-left: 0.5rem;
-    position: relative;
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    transition: color 0.3s ease;
-  }
-  nav ul li a:hover,
-  nav ul li a.active {
-    color: #0a66c2;
-  }
-  nav ul li a.active::after,
-  nav ul li a:hover::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    height: 3px;
-    width: 100%;
-    background: #0a66c2;
-    border-radius: 2px;
-  }
-
-  nav ul li a i {
-    font-style: normal;
-    font-size: 1.3rem;
-  }
-
-  /* Main Content */
-  main {
-    margin-left: 250px;
-    padding: 3rem 4rem 5rem;
-    max-width: 900px;
-    width: 100%;
-  }
-
-  section {
-    margin-bottom: 4rem;
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-  }
-  section.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  h2 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 2.4rem;
-    color: #0a66c2;
-    margin-bottom: 1rem;
-    border-left: 5px solid #0a66c2;
-    padding-left: 1rem;
-    user-select: none;
-  }
-
-  /* Summary */
-  #summary p {
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: #b0bec5;
-  }
-
-  /* Skills */
-  .skills-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 12px 20px;
-    margin-top: 1rem;
-  }
-  .skills-list span {
-    background: #172033;
-    padding: 0.5rem 1rem;
-    border-radius: 14px;
-    box-shadow: 0 0 10px #0a66c2aa;
-    color: #0a66c2;
-    font-weight: 600;
-    font-size: 1rem;
-    cursor: default;
-    user-select: none;
-    transition: background 0.3s ease, color 0.3s ease;
-  }
-  .skills-list span:hover {
-    background: #0a66c2;
-    color: white;
-    box-shadow: 0 0 20px #0a66c2ff;
-  }
-
-  /* Experience and Projects */
-  .item {
-    background: #172033;
-    border-left: 5px solid #0a66c2;
-    border-radius: 6px;
-    padding: 1.3rem 1.5rem;
-    margin-bottom: 1.8rem;
-    box-shadow: 0 4px 15px #0a66c230;
-    transition: box-shadow 0.3s ease;
-  }
-  .item:hover {
-    box-shadow: 0 8px 30px #0a66c270;
-  }
-
-  .item h3 {
-    color: #82b1ff;
-    font-size: 1.3rem;
-    margin-bottom: 0.3rem;
-    font-weight: 700;
-  }
-
-  .item em {
-    font-style: italic;
-    font-weight: 600;
-    color: #90a4ae;
-    display: block;
-    margin-bottom: 0.8rem;
-  }
-
-  .item ul {
-    padding-left: 1.2rem;
-    color: #cfd8dc;
-  }
-  .item ul li {
-    margin-bottom: 0.6rem;
-    font-size: 1rem;
-    line-height: 1.4;
-  }
-
-  /* Project links */
-  .item h3 a {
-    color: #82b1ff;
-    text-decoration: none;
-    border-bottom: 1px dotted #82b1ff;
-    transition: color 0.3s ease;
-  }
-  .item h3 a:hover {
-    color: #0a66c2;
-    border-bottom: 1px solid #0a66c2;
-  }
-
-  /* Footer */
-  footer {
-    margin-left: 250px;
-    padding: 2rem 4rem;
-    text-align: center;
-    color: #607d8b;
-    font-style: italic;
-    font-size: 0.9rem;
-    user-select: none;
-  }
-
-  /* Typed text animation */
-  #typed-name {
-    font-family: 'Poppins', sans-serif;
-    font-size: 3.2rem;
-    font-weight: 700;
-    color: #0a66c2;
-    letter-spacing: 0.15em;
-    margin-bottom: 0.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: 3px solid #0a66c2;
-    animation: typing 2.8s steps(19), blink-caret 0.75s step-end infinite;
-  }
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 19ch }
-  }
-  @keyframes blink-caret {
-    50% { border-color: transparent }
-    100% { border-color: #0a66c2 }
-  }
-
-  /* Responsive */
-  @media (max-width: 800px) {
-    nav {
-      position: relative;
-      width: 100%;
-      border-right: none;
-      border-bottom: 2px solid #0a66c2;
-      flex-direction: row;
-      padding: 1rem 1rem;
-      justify-content: space-around;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chamanthi Pyneni | Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700&family=Roboto&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
     }
-    nav h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0;
-      flex-grow: 1;
+
+    body {
+      background: #0f111a;
+      color: #cfd8dc;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.7;
+    }
+
+    header {
+      padding: 60px 20px 20px;
       text-align: center;
     }
-    nav ul {
-      flex-direction: row;
-      gap: 1rem;
+
+    header h1 {
+      font-size: 3rem;
+      font-family: 'Poppins', sans-serif;
+      color: #0a66c2;
     }
-    nav ul li a {
-      padding-left: 0;
+
+    header p a {
+      color: #82b1ff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+
+    section {
+      max-width: 900px;
+      margin: 50px auto;
+      padding: 0 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    h2 {
+      font-size: 2rem;
+      color: #0a66c2;
+      font-family: 'Poppins', sans-serif;
+      margin-bottom: 20px;
+      border-left: 4px solid #0a66c2;
+      padding-left: 12px;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 10px;
+    }
+
+    .item {
+      background: #172033;
+      border-left: 5px solid #0a66c2;
+      border-radius: 6px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(10,102,194,0.2);
+    }
+
+    .item h3 {
+      color: #82b1ff;
+      font-size: 1.2rem;
+      margin-bottom: 5px;
+    }
+
+    .item em {
+      font-size: 0.9rem;
+      color: #90a4ae;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .skills-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px 16px;
+    }
+
+    .skills-list span {
+      background: #121622;
+      color: #0a66c2;
+      padding: 8px 14px;
+      border-radius: 14px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 0 10px #0a66c2aa;
+      transition: 0.3s;
+    }
+
+    .skills-list span:hover {
+      background: #0a66c2;
+      color: white;
+      box-shadow: 0 0 20px #0a66c2;
+    }
+
+    footer {
+      text-align: center;
+      padding: 40px 10px 20px;
+      color: #607d8b;
       font-size: 0.9rem;
     }
-    main {
-      margin-left: 0;
-      padding: 2rem 1rem 3rem;
-      max-width: 100%;
-    }
-    footer {
-      margin-left: 0;
-      padding: 1.5rem 1rem;
-    }
-  }
-</style>
 
-<!-- Font Awesome CDN for icons -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    a {
+      color: #82b1ff;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
 
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 2.2rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
-<nav>
-  <h1>CHAMAN<span style="color:#82b1ff">THI</span></h1>
-  <ul>
-    <li><a href="#summary" class="active"><i class="fas fa-user"></i> Summary</a></li>
-    <li><a href="#skills"><i class="fas fa-tools"></i> Skills</a></li>
-    <li><a href="#experience"><i class="fas fa-briefcase"></i> Experience</a></li>
-    <li><a href="#projects"><i class="fas fa-code"></i> Projects</a></li>
-    <li><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></li>
-  </ul>
-</nav>
+<header>
+  <h1>Chamanthi Pyneni</h1>
+  <p>
+    <a href="mailto:chamanthipyneni17@gmail.com">Email</a> |
+    <a href="https://linkedin.com/in/chamanthipyneni" target="_blank">LinkedIn</a> |
+    <a href="https://github.com/Chamanthi17" target="_blank">GitHub</a>
+  </p>
+</header>
 
-<main>
-  <section id="summary">
-    <div id="typed-name">Chamanthi Pyneni</div>
-    <p>Software Engineer with internship experience building and optimizing scalable full-stack applications using Java, .NET, Spring Boot, and ML models. Proven ability to develop RESTful APIs, automate workflows, and deploy cloud-native solutions. Passionate about clean code, agile development, and delivering impactful software through hands-on project work and real-world problem solving.</p>
-  </section>
+<section id="summary">
+  <h2>Summary</h2>
+  <p>Software Engineer with internship experience building and optimizing scalable full-stack applications using Java, Python, .NET, Spring Boot, and ML models. Has experience with MySQL and MongoDB. Proven ability to develop RESTful APIs, automate workflows, and deploy cloud-native solutions. Passionate about clean code, agile development, and delivering impactful software through hands-on project work and real-world problem solving.</p>
+</section>
 
-  <section id="skills">
-    <h2>Skills</h2>
-    <div class="skills-list">
-      <span>Java</span>
-      <span>Python</span>
-      <span>C</span>
-      <span>C#</span>
-      <span>.NET</span>
-      <span>PHP</span>
-      <span>Spring Boot</span>
-      <span>Flask</span>
-      <span>Node.js</span>
-      <span>JSP</span>
-      <span>Servlets</span>
-      <span>HTML</span>
-      <span>CSS</span>
-      <span>JavaScript</span>
-      <span>React</span>
-      <span>Salesforce</span>
-      <span>XML</span>
-      <span>MySQL</span>
-      <span>MongoDB</span>
-      <span>AWS (EC2, S3, RDS, IAM, VPC, CloudWatch)</span>
-      <span>Git</span>
-      <span>GitHub</span>
-      <span>Postman</span>
-      <span>Agile</span>
-      <span>SDLC</span>
-    </div>
-  </section>
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-list">
+    <span>Java</span><span>Python</span><span>C</span><span>C#</span><span>.NET</span><span>PHP</span><span>Spring Boot</span><span>Flask</span>
+    <span>Node.js</span><span>JSP</span><span>Servlets</span><span>HTML</span><span>CSS</span><span>JavaScript</span><span>React</span>
+    <span>Salesforce</span><span>XML</span><span>MySQL</span><span>MongoDB</span>
+    <span>AWS (EC2, S3, RDS, IAM, VPC, CloudWatch)</span>
+    <span>Git</span><span>GitHub</span><span>Postman</span><span>Agile</span><span>SDLC</span>
+  </div>
+</section>
 
-  <section id="experience">
-    <h2>Experience</h2>
+<section id="experience">
+  <h2>Experience</h2>
 
-    <article class="item">
-      <h3>Virtusa – Software Development Intern</h3>
-      <em>Oct 2022 – Jul 2023 | Remote</em>
-      <ul>
-        <li>Developed and deployed backend modules using Java, improving processing speed by 15% and supporting scalable enterprise functionality.</li>
-        <li>Delivered RESTful APIs integrated with database systems and internal tools, reducing response latency by 20%.</li>
-        <li>Implemented unit testing with JUnit, achieving 90%+ code coverage and minimizing QA defects by 10%.</li>
-        <li>Participated in Agile ceremonies including sprint planning, stand-ups, and retrospectives within a Scrum team of 6.</li>
-        <li>Used Git and Bitbucket for version control and peer-reviewed code contributions to maintain high standards.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3>Virtusa – Software Development Intern</h3>
+    <em>Oct 2022 – Jul 2023 | Remote</em>
+    <ul>
+      <li>Developed backend modules using Java, improving speed by 15%.</li>
+      <li>Built RESTful APIs reducing latency by 20%.</li>
+      <li>Wrote JUnit tests with 90%+ coverage.</li>
+      <li>Participated in Agile Scrum ceremonies.</li>
+      <li>Used Git & Bitbucket for code collaboration.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3>Smart Internz – Salesforce Developer Intern</h3>
-      <em>Jun 2022 – Sep 2022 | Remote</em>
-      <ul>
-        <li>Built custom Salesforce applications using Apex and Lightning Web Components (LWC) to streamline workflows and enhance CRM efficiency.</li>
-        <li>Automated business processes with Flow Builder, reducing manual operations by 20% and improving data accuracy across 100+ records.</li>
-        <li>Designed and implemented data models, optimizing record handling and boosting scalability for real-time CRM usage.</li>
-      </ul>
-    </article>
-  </section>
+  <div class="item">
+    <h3>Smart Internz – Salesforce Developer Intern</h3>
+    <em>Jun 2022 – Sep 2022 | Remote</em>
+    <ul>
+      <li>Built custom Salesforce apps using Apex & LWC.</li>
+      <li>Automated workflows reducing manual effort by 20%.</li>
+      <li>Designed scalable data models and flows.</li>
+    </ul>
+  </div>
+</section>
 
-  <section id="projects">
-    <h2>Projects</h2>
+<section id="projects">
+  <h2>Projects</h2>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/ecommerce-product-catalog" target="_blank" rel="noopener noreferrer">E-Commerce Product Catalog and Order System</a></h3>
-      <ul>
-        <li>Built and deployed a Spring Boot backend for managing 500+ products and 1,000+ customer orders monthly.</li>
-        <li>Integrated MySQL with Spring Data JPA and REST APIs, cutting query response time by 40%.</li>
-        <li>Deployed the application on AWS and used CloudWatch for real-time monitoring and logging.</li>
-        <li>Implemented admin and user modules with secure checkout flow, increasing order processing efficiency by 35%.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/ecommerce-product-catalog" target="_blank">E-Commerce Product Catalog</a></h3>
+    <ul>
+      <li>Spring Boot backend for 500+ products, deployed on AWS.</li>
+      <li>Integrated MySQL + JPA, improved query time by 40%.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/Student-Accomodation" target="_blank" rel="noopener noreferrer">University Housing System using MongoDB</a></h3>
-      <ul>
-        <li>Built a Flask web app with MongoDB to manage over 1,200 student room assignments annually.</li>
-        <li>Implemented a payment prioritization system, decreasing allocation delays by 25% and improving user satisfaction.</li>
-        <li>Used NoSQL data handling for scalable operations and enhanced administrative processing.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/Student-Accomodation" target="_blank">University Housing System</a></h3>
+    <ul>
+      <li>Flask + MongoDB app for student room assignments.</li>
+      <li>Reduced allocation delays by 25% using priority queuing.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/student-attendance-performance-tracker" target="_blank" rel="noopener noreferrer">Student Attendance and Performance Tracker</a></h3>
-      <ul>
-        <li>Created a Spring Boot backend that tracked attendance and marks for over 300 students across 10+ subjects.</li>
-        <li>Enabled real-time report generation and analytics, reducing manual grading effort by 60%.</li>
-        <li>Integrated Spring Security for secure teacher/admin login and MySQL for structured data management.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/student-attendance-performance-tracker" target="_blank">Attendance & Performance Tracker</a></h3>
+    <ul>
+      <li>Spring Boot + MySQL to track 300+ students across subjects.</li>
+      <li>Spring Security login + real-time analytics.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/Restaurant-functioning-using-multi-threading-and-synchronization" target="_blank" rel="noopener noreferrer">Restaurant Management System (Java Multithreading)</a></h3>
-      <ul>
-        <li>Engineered a Java-based restaurant system using synchronized threads to manage 100+ customer orders and seating concurrently.</li>
-        <li>Reduced table allocation and order wait time by 30% through thread-safe resource sharing and concurrency control.</li>
-        <li>Maintained 100% data accuracy across threads under peak loads, improving service reliability.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/Online-House-Rental-System" target="_blank">Online Rental House System</a></h3>
+    <ul>
+      <li>PHP app for property listing, booking, and payments.</li>
+      <li>Handled tenant details and admin control panel.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/skin-disease-detection" target="_blank" rel="noopener noreferrer">Skin Disease Detection (ML)</a></h3>
-      <ul>
-        <li>Built a CNN-based deep learning model achieving 85% accuracy in skin disease classification.</li>
-        <li>Integrated image upload functionality to provide real-time diagnostic feedback.</li>
-        <li>Used Python, TensorFlow, Keras for model development and deployment.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/Blood-Plasma-Donation-Management-System" target="_blank">Blood & Plasma Donation</a></h3>
+    <ul>
+      <li>Backend and SQL DB for managing donor and recipient info.</li>
+      <li>Matched hospital requests with registered donors.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/Online-House-Rental-System" target="_blank" rel="noopener noreferrer">Online Rental House System</a></h3>
-      <ul>
-        <li>Developed a web application to manage rental properties, tenants, and lease agreements.</li>
-        <li>Implemented features for online bookings, payments, and maintenance requests.</li>
-        <li>Used PHP, HTML, CSS, JavaScript, and MySQL for backend and data management.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/Restaurant-functioning-using-multi-threading-and-synchronization" target="_blank">Restaurant Management System</a></h3>
+    <ul>
+      <li>Used Java Multithreading for order and table handling.</li>
+      <li>Reduced wait time by 30% via sync control.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/Blood-Plasma-Donation-Management-System" target="_blank" rel="noopener noreferrer">Blood and Plasma Donation System</a></h3>
-      <ul>
-        <li>Created a system to manage blood and plasma donations, donor registrations, and hospital requests.</li>
-        <li>Designed and implemented SQL database schema for efficient record keeping.</li>
-        <li>Developed backend APIs to streamline matching donors and recipients.</li>
-      </ul>
-    </article>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/skin-disease-detection" target="_blank">Skin Disease Detection (ML)</a></h3>
+    <ul>
+      <li>CNN model using DenseNet achieving 85% accuracy.</li>
+      <li>Image upload + instant prediction feedback.</li>
+    </ul>
+  </div>
 
-    <article class="item">
-      <h3><a href="https://github.com/Chamanthi17/Student-record-maangement" target="_blank" rel="noopener noreferrer">Student Record Management System</a></h3>
-      <ul>
-        <li>Built a CRUD application to manage student academic records, attendance, and performance tracking.</li>
-        <li>Implemented user roles for admins and teachers with secure access controls.</li>
-        <li>Used PHP, HTML, CSS, and MySQL.</li>
-      </ul>
-    </article>
-  </section>
+  <div class="item">
+    <h3><a href="https://github.com/Chamanthi17/Student-record-maangement" target="_blank">Student Record Management</a></h3>
+    <ul>
+      <li>CRUD app with admin/teacher login using PHP + MySQL.</li>
+      <li>Managed academic records, attendance, and marks.</li>
+    </ul>
+  </div>
+</section>
 
-  <section id="education">
-    <h2>Education</h2>
+<section id="education">
+  <h2>Education</h2>
+  <div class="item">
+    <h3>University of Central Missouri, USA</h3>
+    <em>M.S. in Computer Science | Aug 2023 – May 2025</em>
+  </div>
 
-    <article class="item">
-      <h3>University of Central Missouri, Missouri, USA</h3>
-      <em>M.S. in Computer Science | Aug 2023 – May 2025</em>
-    </article>
-
-    <article class="item">
-      <h3>Vasireddy Venkatadri Institute of Technology, India</h3>
-      <em>B.Tech in Computer Science | Aug 2019 – May 2023</em>
-    </article>
-  </section>
-</main>
+  <div class="item">
+    <h3>Vasireddy Venkatadri Institute of Technology, India</h3>
+    <em>B.Tech in Computer Science | Aug 2019 – May 2023</em>
+  </div>
+</section>
 
 <footer>
-  <p>© 2025 Chamanthi Pyneni</p>
+  <p>© 2025 Chamanthi Pyneni. Built with ❤️ using HTML + CSS.</p>
 </footer>
 
 <script>
-  // Scroll reveal effect for sections
   const sections = document.querySelectorAll('section');
-  function revealSections() {
+  function reveal() {
     const triggerBottom = window.innerHeight * 0.85;
     sections.forEach(section => {
-      const top = section.getBoundingClientRect().top;
-      if (top < triggerBottom) {
+      const sectionTop = section.getBoundingClientRect().top;
+      if (sectionTop < triggerBottom) {
         section.classList.add('visible');
       }
     });
   }
-  window.addEventListener('scroll', revealSections);
-  window.addEventListener('load', revealSections);
-
-  // Nav active link switching on scroll
-  const navLinks = document.querySelectorAll('nav ul li a');
-  window.addEventListener('scroll', () => {
-    let current = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 80;
-      if (pageYOffset >= sectionTop) {
-        current = section.getAttribute('id');
-      }
-    });
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + current) {
-        link.classList.add('active');
-      }
-    });
-  });
+  window.addEventListener('scroll', reveal);
+  window.addEventListener('load', reveal);
 </script>
 
 </body>
